@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import {connect} from 'react-redux';
+import axios from 'axios';
 
 
 
@@ -17,13 +18,24 @@ const SmurfForm = props => {
     const handleSubmit = event => {
         event.preventDefault();
         console.log(newSmurf);
+        axios
+        .post("http://localhost:3333/smurfs", newSmurf)
+        .then(res => {
+            console.log("post success", res);
+        })
+        .catch(err => console.log(err.response));
+        setNewSmurf({
+            name: '',
+            age: '',
+            height: ''
+        })
     }
 
 
     return (
         <div>
             <h1>Add A New Smuf</h1>
-            <form onSubmit={handleSumbit}>
+            <form onSubmit={handleSubmit}>
                 <div>
                     <form onSubmit={event => handleSubmit(event)}>
                         <label>Name</label>
@@ -39,3 +51,5 @@ const SmurfForm = props => {
         </div>
     )
 }
+
+export default SmurfForm;

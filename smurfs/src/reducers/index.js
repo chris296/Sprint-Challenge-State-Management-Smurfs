@@ -1,11 +1,8 @@
 
 
-const initialState = [{
-    name: '',
-    age: '',
-    height: '',
-    id: ''
-}];
+const initialState = {
+    smurfs: []
+}
 
 function reducer(state = initialState, action) {
     console.log('reducer', action);
@@ -17,11 +14,10 @@ function reducer(state = initialState, action) {
         case 'FETCH_SMURF_SUCCESS':
             return{
                 ...state,
-                name: action.payload.name,
-                age: action.payload.age,
-                height: action.payload.height,
-                id: action.payload.id
+                smurfs: action.payload
             }
+        default:
+            return state;
         
     }
 }

@@ -6,18 +6,24 @@ import Smurf from './Smurf';
 
 const SmurfList = props => {
 
-    props.getSmurf();
+    const fetchSmurf = e => {
+        e.preventDefault();
+        props.getSmurf();
+    }
     console.log('this is props',props);
 
     return(
         <div>
-            {props.state.map(item => (
+            {props.smurfs.map(item => (
                 <Smurf key={item.id} item={item}/>
             ))}
+            <button onClick={fetchSmurf}>Fetch Smurfs</button>
         </div>
     )
 }
 
-const mapStateToProps = state => ({state});
+const mapStateToProps = state => ({
+    smurfs: state.smurfs
+})
 
 export default connect(mapStateToProps, {getSmurf})(SmurfList);
